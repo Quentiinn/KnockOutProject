@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container" id="user_block">
+        <div class="card">
+            <div class="card-header">
+                Centres d'intérêts
+            </div>
+            <div class="card-block ">
+                <div class="row">
+                    <div class="col-6 ">
+                        <label>Civilité :</label>
+                        <div class="form-group" data-bind="foreach: genders">
+                            <input type="radio" data-bind="attr: {value: name}, checked: $root.gender">
+                            <label data-bind="text: name"></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="nom">Nom : </label>
+                            <input type="text" class="form-control" id="nom">
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom : </label>
+                            <input type="text" class="form-control" id="prenom">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email : </label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="conf_email">Confirmation email : </label>
+                            <input type="email" class="form-control" id="conf_email">
+                        </div>
+                        <div class="form-group">
+                            <label for="interets">Centres d'intérêts : (entre 1 et 3 choix)</label>
+                            <input type="text" class="form-control" id="interets">
+                        </div>
+
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="departement">Département :</label>
+                            <input type="text" class="form-control" id="departement">
+                        </div>
+                        <div class="form-group">
+                            <label for="ville">Ville :</label>
+                            <input type="text" class="form-control" id="ville">
+                        </div>
+                        <div class="form-group">
+                            <label for="habitat">Habitat :</label>
+                            <input type="text" class="form-control" id="habitat">
+                        </div>
+                        <div class="form-group">
+                            <label for="pseudo">Pseudo :</label>
+                            <input type="text" class="form-control" id="pseudo">
+                        </div>
+                        <div class="form-group">
+                            <label for="naissance">Date de naissance :</label>
+                            <input type="text" class="form-control" id="naissance">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary center-block col-md-2 col-xs-2 col1">Ajouter</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+</html>
+
+
+<script>
+    $(function () {
+        function appViewModel(){
+            this.genders = ko.observableArray([{name: "M"} , {name: "Mme"}]);
+            this.gender = ko.observable('M');
+        }
+        ko.applyBindings(new appViewModel() , $("#user_block")[0])
+    })
+</script>
+
