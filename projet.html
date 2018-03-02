@@ -32,51 +32,51 @@
                         </div>
                         <div class="form-group">
                             <label for="nom">Nom : </label>
-                            <input type="text" class="form-control" id="nom">
+                            <input type="text" class="form-control" id="nom" data-bind="textInput: nom">
                         </div>
                         <div class="form-group">
                             <label for="prenom">Prénom : </label>
-                            <input type="text" class="form-control" id="prenom">
+                            <input type="text" class="form-control" id="prenom" data-bind="textInput: prenom">
                         </div>
                         <div class="form-group">
                             <label for="email">Email : </label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="email" data-bind="textInput: email">
                         </div>
                         <div class="form-group">
                             <label for="conf_email">Confirmation email : </label>
-                            <input type="email" class="form-control" id="conf_email">
+                            <input type="email" class="form-control" id="conf_email" data-bind="textInput: conf_email">
                         </div>
                         <div class="form-group">
                             <label for="interets">Centres d'intérêts : (entre 1 et 3 choix)</label>
-                            <input type="text" class="form-control" id="interets">
+                            <input type="text" class="form-control" id="interets" data-bind="textInput: interets">
                         </div>
 
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="departement">Département :</label>
-                            <input type="text" class="form-control" id="departement">
+                            <input type="text" class="form-control" id="departement" data-bind="textInput: departement">
                         </div>
                         <div class="form-group">
                             <label for="ville">Ville :</label>
-                            <input type="text" class="form-control" id="ville">
+                            <input type="text" class="form-control" id="ville" data-bind="textInput: ville">
                         </div>
                         <div class="form-group">
                             <label for="habitat">Habitat :</label>
-                            <input type="text" class="form-control" id="habitat">
+                            <input type="text" class="form-control" id="habitat" data-bind="textInput: habitat">
                         </div>
                         <div class="form-group">
                             <label for="pseudo">Pseudo :</label>
-                            <input type="text" class="form-control" id="pseudo">
+                            <input type="text" class="form-control" id="pseudo" data-bind="textInput: pseudo">
                         </div>
                         <div class="form-group">
                             <label for="naissance">Date de naissance :</label>
-                            <input type="text" class="form-control" id="naissance">
+                            <input type="text" class="form-control" id="naissance" data-bind="textInput: naissance">
                         </div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary center-block col-md-2 col-xs-2 col1">Ajouter</button>
+                    <button class="btn btn-primary center-block col-md-2 col-xs-2 col1" data-bind="click : log">Ajouter</button>
                 </div>
             </div>
 
@@ -97,6 +97,16 @@
         function appViewModel(){
             this.genders = ko.observableArray([{name: "M"} , {name: "Mme"}]);
             this.gender = ko.observable('M');
+            this.nom = ko.observable('');
+
+
+            this.log = function(){
+                if (this.nom() == ""){
+
+                }
+                console.log(this.nom())
+            }
+
         }
         ko.applyBindings(new appViewModel() , $("#user_block")[0])
     })
