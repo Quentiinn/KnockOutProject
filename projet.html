@@ -11,8 +11,18 @@
             crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout-validation/2.0.3/knockout.validation.min.js"></script>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<style>
+    .validationMessage {
+        color: #f00;
+    }
+
+    .input-validation-error{
+        border-color:red;
+    }
+</style>
     <title>Document</title>
 </head>
 <body>
@@ -32,51 +42,63 @@
                         </div>
                         <div class="form-group">
                             <label for="nom">Nom : </label>
-                            <input type="text" class="form-control" id="nom" data-bind="textInput: nom">
+                            <input type="text" class="form-control" id="nom" data-bind="textInput: nom,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                         <div class="form-group">
                             <label for="prenom">Prénom : </label>
-                            <input type="text" class="form-control" id="prenom" data-bind="textInput: prenom">
+                            <input type="text" class="form-control" id="prenom" data-bind="textInput: prenom,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                         <div class="form-group">
                             <label for="email">Email : </label>
-                            <input type="email" class="form-control" id="email" data-bind="textInput: email">
+                            <input type="email" class="form-control" id="email" data-bind="textInput: email,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                         <div class="form-group">
                             <label for="conf_email">Confirmation email : </label>
-                            <input type="email" class="form-control" id="conf_email" data-bind="textInput: conf_email">
+                            <input type="email" class="form-control" id="conf_email" data-bind="textInput: conf_email,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                         <div class="form-group">
                             <label for="interets">Centres d'intérêts : (entre 1 et 3 choix)</label>
-                            <input type="text" class="form-control" id="interets" data-bind="textInput: interets">
+                            <input type="text" class="form-control" id="interets" data-bind="textInput: interets,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
 
                     </div>
                     <div class="col-6">
                         <div class="form-group">
                             <label for="departement">Département :</label>
-                            <input type="text" class="form-control" id="departement" data-bind="textInput: departement">
+                            <input type="text" class="form-control" id="departement" data-bind="textInput: departement,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                         <div class="form-group">
                             <label for="ville">Ville :</label>
-                            <input type="text" class="form-control" id="ville" data-bind="textInput: ville">
+                            <input type="text" class="form-control" id="ville" data-bind="textInput: ville,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
+
                         </div>
-                        <div class="form-group">
-                            <label for="habitat">Habitat :</label>
-                            <input type="text" class="form-control" id="habitat" data-bind="textInput: habitat">
+                        <div class="form-group" data-bind="foreach: habitats">
+                            <input type="radio" data-bind="attr: {value: name}, checked: $root.habitat,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
+                            <label data-bind="text: name"></label>
+
                         </div>
                         <div class="form-group">
                             <label for="pseudo">Pseudo :</label>
-                            <input type="text" class="form-control" id="pseudo" data-bind="textInput: pseudo">
+                            <input type="text" class="form-control" id="pseudo" data-bind="textInput: pseudo,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                         <div class="form-group">
                             <label for="naissance">Date de naissance :</label>
-                            <input type="text" class="form-control" id="naissance" data-bind="textInput: naissance">
+                            <input type="text" class="form-control" id="naissance" data-bind="textInput: naissance,  validationOptions: { errorElementClass:
+                                                 'input-validation-error' }">
                         </div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <button class="btn btn-primary center-block col-md-2 col-xs-2 col1" data-bind="click : log">Ajouter</button>
+                    <button type="button" class="btn btn-primary center-block col-md-2 col-xs-2 col1" data-bind='click: submit'>Ajouter</button>
                 </div>
             </div>
 
@@ -86,29 +108,49 @@
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
 </html>
 
 
 <script>
+
+
     $(function () {
-        function appViewModel(){
-            this.genders = ko.observableArray([{name: "M"} , {name: "Mme"}]);
-            this.gender = ko.observable('M');
-            this.nom = ko.observable('');
-
-
-            this.log = function(){
-                if (this.nom() == ""){
-
-                }
-                console.log(this.nom())
+        ko.validation.init({
+            decorateInputElement: true,
+            errorElementClass: 'has-error'
+        });
+        function viewmodel(){
+            var self = this;
+            this.nom= ko.observable().extend({required: true });
+            this.genders= ko.observableArray([{name: "M"} , {name: "Mme"}]);
+            this.gender= ko.observable('M');
+            this.prenom= ko.observable().extend({required: true});
+            this.email= ko.observable().extend({required: true , email: true});
+            this.conf_email= ko.observable().extend({required: true});
+            this.departement= ko.observable().extend({required: true});
+            this.ville= ko.observable().extend({required: true});
+            this.habitats= ko.observableArray([{name: "Ville"} , {name: "Campane"}]);
+            this.habitat= ko.observable('Ville');
+            this.pseudo= ko.observable().extend({required: true});
+            this.naissance= ko.observable().extend({required: true})
+            this.submit = function(){
+                this.errors.showAllMessages(true);
             }
-
+            this.errors = ko.validation.group(self, {deep: true});
+            //this.errors.showAllMessages(true);
         }
-        ko.applyBindings(new appViewModel() , $("#user_block")[0])
+        viewModel = new viewmodel();
+        viewModel.errors = ko.validation.group(viewModel);
+
+        ko.applyBindings(viewModel , $("#user_block")[0])
+
+
+
+
     })
+
 </script>
 
